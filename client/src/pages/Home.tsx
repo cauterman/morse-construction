@@ -115,6 +115,7 @@ export default function Home() {
   const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
   const [activeDrone, setActiveDrone] = useState<string>(ASSETS.drone1);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "", planInterest: "" });
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   
   // Seven Things state removed (moved to dedicated page)
@@ -122,14 +123,44 @@ export default function Home() {
   // State for the new FAQ accordion
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Please fill out all required fields.");
       return;
     }
-    toast.success("Thank you! Your message has been sent. We will contact you shortly.");
-    setFormData({ name: "", email: "", phone: "", message: "", planInterest: "" });
+
+    setIsSubmittingContact(true);
+
+    try {
+      const submissionData = new URLSearchParams({
+        "form-name": "contact",
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        planInterest: formData.planInterest,
+        message: formData.message,
+      });
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: submissionData.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Netlify Forms submission failed with status ${response.status}`);
+      }
+
+      toast.success("Thank you! Your message has been sent. We will contact you shortly.");
+      setFormData({ name: "", email: "", phone: "", message: "", planInterest: "" });
+    } catch (error) {
+      console.error("Contact form submission failed", error);
+      toast.error("We could not send your message. Please call or email Morse Construction directly.");
+    } finally {
+      setIsSubmittingContact(false);
+    }
   };
 
   const placeholderToast = (featureName: string) => {
@@ -660,7 +691,21 @@ export default function Home() {
 
             {/* Modern Contact Form */}
             <div className="lg:col-span-7 bg-white border border-[#2C2C2A]/10 p-8 md:p-10 shadow-lg">
-              <form onSubmit={handleContactSubmit} className="space-y-6">
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleContactSubmit}
+                className="space-y-6"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="planInterest" value={formData.planInterest} />
+                <p className="hidden" aria-hidden="true">
+                  <label>
+                    Do not fill this out if you are human: <input name="bot-field" />
+                  </label>
+                </p>
                 {formData.planInterest && (
                   <div className="bg-[#1C3F24]/5 border border-[#1C3F24]/10 p-3 text-xs text-[#1C3F24] font-semibold flex items-center justify-between">
                     <span>Inquiring about house plan: {formData.planInterest}</span>
@@ -678,7 +723,8 @@ export default function Home() {
                   <div>
                     <label className="block text-xs uppercase tracking-wider font-bold text-[#2C2C2A]/70 mb-2">Name *</label>
                     <input 
-                      type="text" 
+                      type="text"
+                      name="name"
                       required
                       value={formData.name}
                       onChange={e => setFormData({ ...formData, name: e.target.value })}
@@ -689,7 +735,8 @@ export default function Home() {
                   <div>
                     <label className="block text-xs uppercase tracking-wider font-bold text-[#2C2C2A]/70 mb-2">Email *</label>
                     <input 
-                      type="email" 
+                      type="email"
+                      name="email"
                       required
                       value={formData.email}
                       onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -702,7 +749,8 @@ export default function Home() {
                 <div>
                   <label className="block text-xs uppercase tracking-wider font-bold text-[#2C2C2A]/70 mb-2">Phone Number</label>
                   <input 
-                    type="tel" 
+                    type="tel"
+                    name="phone"
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-[#FBFBFA] border border-[#2C2C2A]/10 p-3 text-sm focus:outline-none focus:border-[#1C3F24] transition-colors"
@@ -713,6 +761,7 @@ export default function Home() {
                 <div>
                   <label className="block text-xs uppercase tracking-wider font-bold text-[#2C2C2A]/70 mb-2">Your Message *</label>
                   <textarea 
+                    name="message"
                     rows={4}
                     required
                     value={formData.message}
@@ -724,9 +773,10 @@ export default function Home() {
 
                 <Button 
                   type="submit"
-                  className="bg-[#1C3F24] hover:bg-[#142F1A] text-[#FBFBFA] font-medium rounded-none w-full py-4 text-base"
+                  disabled={isSubmittingContact}
+                  className="bg-[#1C3F24] hover:bg-[#142F1A] text-[#FBFBFA] font-medium rounded-none w-full py-4 text-base disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Send Message
+                  {isSubmittingContact ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>
