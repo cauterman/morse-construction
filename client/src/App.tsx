@@ -9,6 +9,7 @@ import SevenThings from "./pages/SevenThings";
 import AreaInfo from "./pages/AreaInfo";
 import Social from "./pages/Social";
 import ProcessDetail from "./pages/ProcessDetail";
+import HousePlanDetail from "./pages/HousePlanDetail";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/area-info" component={AreaInfo} />
       <Route path="/social" component={Social} />
       <Route path="/process/:slug" component={ProcessDetail} />
+      <Route path="/plans/:slug" component={HousePlanDetail} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
