@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,11 +30,12 @@ import { toast } from "sonner";
 // Removed SEVEN_THINGS_DATA import as it is now moved to its own dedicated page
 import { FAQ_DATA } from "../faqData";
 import { PROCESS_STEPS } from "../processData";
+import { HOUSE_PLANS, getHousePlan } from "../housePlans";
 
-// High-quality generated and client drone assets
+// Morse Construction project assets
 const ASSETS = {
   hero: "/assets/morse/pine_st_hero_26ff1fc6.jpg",
-  interior: "https://d2xsxph8kpxj0f.cloudfront.net/310519663704077519/QQvH5TfEQgJbe5jUyfqBbm/modern-interior-ZNqz3uXRpyuAPhHRpVGfwF.webp",
+  videoCover: "/assets/morse/plans/maple-exterior.webp",
   
   // Client's actual drone project photos (enhanced)
   drone1: "/assets/morse/pine-st-drone-1_7083d3e5.jpg",
@@ -43,46 +44,6 @@ const ASSETS = {
   drone4: "/assets/morse/pine-st-drone-4_f01795a2.jpg",
   drone5: "/assets/morse/pine-st-drone-5_3254456e.jpg"
 };
-
-// Existing house plans data structured beautifully
-const HOUSE_PLANS = [
-  {
-    name: "The Byrne",
-    size: "1,440 sq. ft.",
-    beds: 3,
-    baths: 2,
-    style: "Modern Bungalow",
-    desc: "A beautifully compact design maximizing natural light and single-level convenience.",
-    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name: "The Blomidon",
-    size: "2,804 sq. ft.",
-    beds: 4,
-    baths: 3.5,
-    style: "Contemporary Estate",
-    desc: "Designed for panoramic views of the Annapolis Valley with floor-to-ceiling glass.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name: "The Lockwood",
-    size: "1,288 sq. ft.",
-    beds: 2,
-    baths: 2,
-    style: "Classic Cottage",
-    desc: "Cozy yet spacious living, perfect for downsizers or a premium secondary home.",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name: "The Modern",
-    size: "2,273 sq. ft.",
-    beds: 3,
-    baths: 2.5,
-    style: "Architectural Minimalist",
-    desc: "Bold lines, flat roof accents, and sustainable materials built for modern living.",
-    image: ASSETS.hero
-  }
-];
 
 // Testimonials from original site
 const TESTIMONIALS = [
@@ -112,11 +73,22 @@ const IconResolver = ({ name, className }: { name: string; className?: string })
 };
 
 export default function Home() {
-  const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
   const [activeDrone, setActiveDrone] = useState<string>(ASSETS.drone1);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "", planInterest: "" });
   const [isSubmittingContact, setIsSubmittingContact] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  // Carry the selected house plan into the existing Netlify contact form.
+  useEffect(() => {
+    const requestedPlan = getHousePlan(new URLSearchParams(window.location.search).get("plan") ?? undefined);
+    if (requestedPlan) {
+      setFormData(previous => ({ ...previous, planInterest: requestedPlan.name }));
+    }
+    const target = window.location.hash.slice(1);
+    if (target) {
+      requestAnimationFrame(() => document.getElementById(target)?.scrollIntoView({ behavior: "instant" }));
+    }
+  }, []);
   
   // Seven Things state removed (moved to dedicated page)
 
@@ -307,11 +279,11 @@ export default function Home() {
             <div className="lg:col-span-6 order-2 lg:order-1">
               <div className="relative border border-[#2C2C2A]/10 shadow-xl overflow-hidden aspect-video bg-black group">
                 {!isVideoPlaying ? (
-                  <div className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer" onClick={() => setIsVideoPlaying(true)}>
+                  <button className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-[-4px]" type="button" aria-label="Play Morse Construction building journey video" onClick={() => setIsVideoPlaying(true)}>
                     <img 
-                      src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" 
-                      alt="Modern Architectural Construction video cover" 
-                      className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500"
+                      src={ASSETS.videoCover}
+                      alt="The Maple by Morse Construction — building journey video cover"
+                      className="absolute inset-0 w-full h-full object-contain opacity-70 transition-opacity duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1C3F24]/60 to-transparent pointer-events-none" />
                     
@@ -324,7 +296,7 @@ export default function Home() {
                       <Layers className="w-4 h-4 text-[#E5D5C5]" />
                       Watch Our Building Journey
                     </div>
-                  </div>
+                  </button>
                 ) : (
                   <iframe 
                     className="absolute inset-0 w-full h-full"
@@ -482,7 +454,7 @@ export default function Home() {
       {/* Seven Things section has been completely moved to its own dedicated /seven-things page to make the homepage shorter and more concise */}
 
       {/* House Plans Showcase */}
-      <section id="plans" className="py-24 bg-[#F5EFE6]/30 border-t border-[#2C2C2A]/10">
+      <section id="plans" className="scroll-mt-24 py-24 bg-[#F5EFE6]/30 border-t border-[#2C2C2A]/10">
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
             <div>
@@ -491,11 +463,13 @@ export default function Home() {
                 Signature House Plans
               </h2>
               <p className="text-sm text-[#2C2C2A]/70 mt-2">
-                Click on any plan to inspect details or customize it for your land.
+                Explore eight Morse Construction designs. View the photos and floor plans, then make a plan your own.
               </p>
             </div>
             <Button 
-              onClick={() => placeholderToast("Custom Blueprint Request")}
+              onClick={() => {
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
               variant="outline" 
               className="mt-4 md:mt-0 border-[#1C3F24]/20 hover:bg-[#1C3F24]/5 text-[#1C3F24] rounded-none font-medium"
             >
@@ -504,52 +478,32 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {HOUSE_PLANS.map((plan, i) => (
-              <Card 
-                key={i} 
-                className={`rounded-none border transition-all cursor-pointer overflow-hidden bg-white ${
-                  selectedPlan === i 
-                    ? "ring-2 ring-[#1C3F24] border-transparent shadow-xl" 
-                    : "border-[#2C2C2A]/10 hover:shadow-lg"
-                }`}
-                onClick={() => setSelectedPlan(selectedPlan === i ? null : i)}
+            {HOUSE_PLANS.map(plan => (
+              <Link
+                key={plan.slug}
+                href={`/plans/${plan.slug}`}
+                aria-label={`View ${plan.name} photos and floor plans`}
+                className="group block h-full focus-visible:outline-2 focus-visible:outline-[#1C3F24] focus-visible:outline-offset-4"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img src={plan.image} alt={plan.name} className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-3 right-3 bg-[#1C3F24] text-[#FBFBFA] text-xs font-semibold px-2.5 py-1 uppercase tracking-wider">
-                    {plan.size}
+                <Card className="h-full py-0 gap-0 rounded-none border border-[#2C2C2A]/10 transition-all overflow-hidden bg-white group-hover:shadow-lg group-hover:border-[#1C3F24]/25 flex flex-col">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[#F5EFE6]/60">
+                    <img src={plan.thumbnail} alt={`${plan.name} exterior by Morse Construction`} loading="lazy" className="w-full h-full object-contain" />
                   </div>
-                </div>
-                <CardContent className="p-6">
-                  <span className="text-xs uppercase tracking-wider text-[#8A705E] font-bold block mb-1">{plan.style}</span>
-                  <h3 className="font-serif text-xl font-bold text-[#1C3F24] mb-2">{plan.name}</h3>
-                  <p className="text-xs text-[#2C2C2A]/70 line-clamp-2 mb-4">{plan.desc}</p>
-                  
-                  <div className="flex items-center justify-between pt-4 border-t border-[#2C2C2A]/5 text-xs text-[#2C2C2A]/60">
-                    <span>{plan.beds} Bedrooms</span>
-                    <span>•</span>
-                    <span>{plan.baths} Bathrooms</span>
-                  </div>
-
-                  {selectedPlan === i && (
-                    <div className="mt-4 pt-4 border-t border-[#1C3F24]/10 bg-[#1C3F24]/5 p-3 text-center">
-                      <p className="text-xs text-[#1C3F24] font-semibold mb-2">Interested in this design?</p>
-                      <Button 
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setFormData(prev => ({ ...prev, planInterest: plan.name }));
-                          const element = document.getElementById('contact');
-                          element?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className="bg-[#1C3F24] hover:bg-[#142F1A] text-[#FBFBFA] w-full text-xs rounded-none"
-                      >
-                        Inquire About {plan.name}
-                      </Button>
+                  <CardContent className="p-6 flex flex-col flex-1">
+                    <span className="text-[10px] uppercase tracking-wider text-[#8A705E] font-bold block mb-2">{plan.style}</span>
+                    <h3 className="font-serif text-xl font-bold text-[#1C3F24] mb-2">{plan.name}</h3>
+                    <p className="text-xs font-semibold text-[#1C3F24] mb-3">{plan.cardAreaLabel}</p>
+                    <p className="text-xs text-[#2C2C2A]/70 leading-relaxed mb-5 flex-1">{plan.summary}</p>
+                    <div className="pt-4 border-t border-[#2C2C2A]/5 text-xs text-[#2C2C2A]/60 space-y-1 mb-4">
+                      <p>{plan.bedroomSummary}</p>
+                      <p>{plan.bathsLabel} bathrooms</p>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
+                    <span className="inline-flex items-center gap-2 text-[11px] font-bold text-[#1C3F24]">
+                      View plan &amp; details <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -650,7 +604,7 @@ export default function Home() {
       </section>
 
       {/* Contact Form Section */}
-      <section id="contact" className="py-24 bg-[#F5EFE6]/20 border-t border-[#2C2C2A]/10">
+      <section id="contact" className="scroll-mt-24 py-24 bg-[#F5EFE6]/20 border-t border-[#2C2C2A]/10">
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             
