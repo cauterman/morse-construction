@@ -31,6 +31,7 @@ import { toast } from "sonner";
 import { FAQ_DATA } from "../faqData";
 import { PROCESS_STEPS } from "../processData";
 import { HOUSE_PLANS, getHousePlan } from "../housePlans";
+import TestimonialSection from "@/components/TestimonialSection";
 
 // Morse Construction project assets
 const ASSETS = {
@@ -44,20 +45,6 @@ const ASSETS = {
   drone4: "/assets/morse/pine-st-drone-4_f01795a2.jpg",
   drone5: "/assets/morse/pine-st-drone-5_3254456e.jpg"
 };
-
-// Testimonials from original site
-const TESTIMONIALS = [
-  {
-    quote: "You took the time to get to know us and educate us about the home building process – allowing us the chance to collaborate on a design that is both functional, beautiful and ideally suited to our family.",
-    author: "Scott & Stephanie Hale",
-    project: "Custom Family Home"
-  },
-  {
-    quote: "The whole package that you offer your clients (not just building them a house) certainly exceeded our expectations of what a contractor's role can be. This kind of service is invaluable and worth much in time and money.",
-    author: "Blaine & Karen North",
-    project: "Modern Timber Renovation"
-  }
-];
 
 // Helper to resolve icon string to Lucide icon
 const IconResolver = ({ name, className }: { name: string; className?: string }) => {
@@ -509,31 +496,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 bg-[#F5EFE6]/50 border-t border-[#2C2C2A]/10">
-        <div className="max-w-5xl mx-auto px-4 md:px-12">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-[0.2em] text-[#8A705E] font-bold block mb-2">TESTIMONIALS</span>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-[#1C3F24]">
-              What Our Clients Say
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="border-l-2 border-[#8A705E] pl-8 py-4 flex flex-col justify-between">
-                <p className="font-serif text-lg italic leading-relaxed text-[#2C2C2A]/90 mb-6">
-                  "{t.quote}"
-                </p>
-                <div>
-                  <span className="block font-bold text-[#1C3F24]">{t.author}</span>
-                  <span className="text-xs text-[#2C2C2A]/60">{t.project}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialSection />
 
       {/* NEW: Interactive FAQ Accordion Section (Gary's 10 FAQs) */}
       <section id="faq" className="py-24 bg-white border-t border-[#2C2C2A]/10">
