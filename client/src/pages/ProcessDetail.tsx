@@ -39,7 +39,7 @@ export default function ProcessDetail() {
             <a href="/#about" className="hover:text-[#1C3F24] transition-colors">About Us</a>
             <a href="/#process" className="text-[#1C3F24] transition-colors">Process</a>
             <a href="/#featured-project" className="hover:text-[#1C3F24] transition-colors">Featured Build</a>
-            <a href="/#plans" className="hover:text-[#1C3F24] transition-colors">Plans</a>
+            <Link href="/plans" className="hover:text-[#1C3F24] transition-colors">Plans</Link>
             <a href="/#faq" className="hover:text-[#1C3F24] transition-colors">FAQ</a>
             <Link href="/area-info" className="hover:text-[#1C3F24] transition-colors">Area Information</Link>
             <Link href="/social" className="hover:text-[#1C3F24] transition-colors">Posts</Link>
