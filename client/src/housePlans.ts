@@ -272,8 +272,218 @@ export const HOUSE_PLANS: HousePlan[] = [
       }
     ],
     "specNote": "Living area follows the figure printed on the supplied drawing; garage and outdoor areas are not added to it."
+  },
+  {
+    "slug": "modern",
+    "name": "The Modern",
+    "areaLabel": "2,294 sq. ft. total living area — 1,234 main + 1,060 second",
+    "cardAreaLabel": "2,294 sq. ft. total living area",
+    "bedroomSummary": "3 bedrooms",
+    "style": "Two-storey living",
+    "summary": "A two-storey layout with three upstairs bedrooms, an island kitchen, separate family room and attached two-car garage.",
+    "description": "The Modern pairs a kitchen with an island and adjoining dining and living areas with a separate family room. Upstairs are three bedrooms, including a primary bedroom with a walk-in closet and shower ensuite. A main-floor shower bathroom and attached two-car garage complete the layout.",
+    "features": [
+      "Kitchen island with adjoining dining and living areas",
+      "Separate main-floor family room",
+      "Three second-floor bedrooms",
+      "Primary bedroom with walk-in closet and shower ensuite",
+      "Attached two-car garage"
+    ],
+    "specNote": "The supplied main- and second-floor sheets print separate living areas of 1,234 and 1,060 sq. ft., totaling 2,294 sq. ft.; these figures are not independently measured. The garage is shown separately from living space. All three bedrooms are upstairs; the main-floor family room is not counted as a bedroom. Fixtures show a main-floor shower bathroom, an upstairs tub bathroom and a primary shower ensuite. No lower-floor plan was supplied. These drawings are brainstorming material, not construction-ready plans.",
+    "bedsLabel": "3",
+    "bathsLabel": "3",
+    "image": "/assets/morse/plans/modern-exterior.webp",
+    "thumbnail": "/assets/morse/plans/modern-thumbnail.webp",
+    "floors": [
+      {
+        "label": "Main floor",
+        "area": "1,234 sq. ft.",
+        "preview": "/assets/morse/plans/modern-main-floor.webp",
+        "pdf": "/assets/morse/plans/modern-main-floor.pdf"
+      },
+      {
+        "label": "Second floor",
+        "area": "1,060 sq. ft.",
+        "preview": "/assets/morse/plans/modern-second-floor.webp",
+        "pdf": "/assets/morse/plans/modern-second-floor.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "mount",
+    "name": "The Mount",
+    "areaLabel": "3,325 sq. ft. total living area (main: 2,266; second: 1,059)",
+    "cardAreaLabel": "3,325 sq. ft. total living area",
+    "bedroomSummary": "4 bedrooms + flexible den",
+    "style": "Two-storey living",
+    "summary": "The Mount pairs a main-floor primary suite with three upstairs bedrooms, a flexible office/den, a loft and a screened room.",
+    "description": "The Mount offers a main-floor primary bedroom with an ensuite and walk-in closet, plus three bedrooms and a loft upstairs. The kitchen includes an island and pantry beside the great room and dining area. An office/den, screened room and attached garage complete the layout.",
+    "features": [
+      "Main-floor primary suite with ensuite and walk-in closet",
+      "Three upstairs bedrooms and a loft",
+      "Kitchen island and pantry",
+      "Flexible main-floor office/den",
+      "Screened room and attached garage"
+    ],
+    "specNote": "The supplied main- and second-floor sheets print distinct living areas of 2,266 and 1,059 sq. ft.; the reported total is their sum, not an independent measurement. Four labelled bedrooms are shown; the office/den and loft are not counted as bedrooms. Fixtures confirm a main-floor ensuite with tub, shower, two basins and toilet, a separate main-floor toilet-and-basin half bathroom, and an upstairs bathroom with tub, basin and toilet. The sheets do not explicitly state whether garage, screened-room or storage areas are included in the printed living-area figures. These drawings are brainstorming material, not construction-ready plans.",
+    "bedsLabel": "4",
+    "bathsLabel": "2.5",
+    "image": "/assets/morse/plans/mount-exterior.webp",
+    "thumbnail": "/assets/morse/plans/mount-thumbnail.webp",
+    "floors": [
+      {
+        "label": "Main floor",
+        "area": "2,266 sq. ft.",
+        "preview": "/assets/morse/plans/mount-main-floor.webp",
+        "pdf": "/assets/morse/plans/mount-main-floor.pdf"
+      },
+      {
+        "label": "Second floor",
+        "area": "1,059 sq. ft.",
+        "preview": "/assets/morse/plans/mount-second-floor.webp",
+        "pdf": "/assets/morse/plans/mount-second-floor.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "canaan",
+    "name": "The Canaan",
+    "areaLabel": "Main floor: 1,678 sq. ft. living area; lower floor: 1,058 sq. ft. finished area",
+    "cardAreaLabel": "Main 1,678 / lower finished 1,058 sq. ft.",
+    "bedroomSummary": "4 bedrooms",
+    "style": "Main & lower levels",
+    "summary": "The Canaan combines a main-floor primary suite, kitchen/family space and living/dining areas with three bedrooms on the lower level.",
+    "description": "The Canaan offers a main-floor primary bedroom with an ensuite, a kitchen/family area with an island, and living and dining spaces. A powder room sits near the garage entry. The lower floor includes three bedrooms, a full bathroom, utility/storage space and additional unfinished space.",
+    "features": [
+      "Main-floor primary bedroom with ensuite",
+      "Kitchen/family area with island",
+      "Living and dining spaces",
+      "Three lower-floor bedrooms and a full bathroom",
+      "Lower-level utility/storage and unfinished space"
+    ],
+    "specNote": "Areas are reported separately as printed: 1,678 sq. ft. of main-floor living area and 1,058 sq. ft. of lower-floor finished area, not repeated whole-home totals. The lower sheet also shows unfinished areas outside its finished-area coverage. Garage space is shown separately from living/finished space. Counts cover both supplied floors: one bedroom, one full ensuite and one powder room on the main floor; three bedrooms and one full bathroom on the lower floor. The bathroom fixtures were checked visually. These drawings are brainstorming material, not construction-ready plans.",
+    "bedsLabel": "4",
+    "bathsLabel": "2.5",
+    "image": "/assets/morse/plans/canaan-exterior.webp",
+    "thumbnail": "/assets/morse/plans/canaan-thumbnail.webp",
+    "floors": [
+      {
+        "label": "Main floor",
+        "area": "1,678 sq. ft.",
+        "preview": "/assets/morse/plans/canaan-main-floor.webp",
+        "pdf": "/assets/morse/plans/canaan-main-floor.pdf"
+      },
+      {
+        "label": "Lower floor — finished area",
+        "area": "1,058 sq. ft.",
+        "preview": "/assets/morse/plans/canaan-lower-floor.webp",
+        "pdf": "/assets/morse/plans/canaan-lower-floor.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "overlook",
+    "name": "The Overlook",
+    "areaLabel": "2,443 sq. ft. total — 1,521 main floor + 922 second floor",
+    "cardAreaLabel": "2,443 sq. ft. total (two floors)",
+    "bedroomSummary": "3 bedrooms + flexible den",
+    "style": "Two-storey living",
+    "summary": "A two-storey layout with a main-floor primary bedroom, upstairs family room, rooftop patio and dedicated spaces for work and recreation.",
+    "description": "The Overlook places the primary bedroom, an island kitchen, dining area and great room on the main floor. Upstairs, two bedrooms share a family room alongside two offices and a rooftop patio. A main-floor den/study, simulator room and attached garage add distinct spaces.",
+    "features": [
+      "Main-floor primary bedroom",
+      "Kitchen island, dining area and great room",
+      "Upstairs family room and rooftop patio",
+      "Den/study and two upstairs offices",
+      "Simulator room and attached garage"
+    ],
+    "specNote": "The main- and second-floor sheets print separate living areas of 1,521 and 922 sq. ft., respectively; their combined reported area is 2,443 sq. ft., not independently measured. Counts cover only these two supplied floors: one main-floor bedroom and two upstairs, with one full bath and one half bath downstairs and one full bath upstairs. The den/study and offices are not counted as bedrooms. The sheets do not explicitly document garage or simulator-room inclusion in the living-area figure. These drawings are brainstorming material, not construction-ready plans.",
+    "bedsLabel": "3",
+    "bathsLabel": "2.5",
+    "image": "/assets/morse/plans/overlook-exterior.webp",
+    "thumbnail": "/assets/morse/plans/overlook-thumbnail.webp",
+    "floors": [
+      {
+        "label": "Main floor",
+        "area": "1,521 sq. ft.",
+        "preview": "/assets/morse/plans/overlook-main-floor.webp",
+        "pdf": "/assets/morse/plans/overlook-main-floor.pdf"
+      },
+      {
+        "label": "Second floor",
+        "area": "922 sq. ft.",
+        "preview": "/assets/morse/plans/overlook-second-floor.webp",
+        "pdf": "/assets/morse/plans/overlook-second-floor.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "willow",
+    "name": "The Willow",
+    "areaLabel": "2,233 sq. ft. main-floor living area",
+    "cardAreaLabel": "2,233 sq. ft. main floor",
+    "bedroomSummary": "3 bedrooms + flexible study and office",
+    "style": "Main-floor living",
+    "summary": "The Willow pairs three main-floor bedrooms with a great room, island kitchen, separate study and office.",
+    "description": "The Willow brings three bedrooms together with a great room, dining area and island kitchen. A pantry, separate study and office add useful spaces, while the primary suite includes a tub, shower and dual sinks. The plan also shows an attached garage and a deck.",
+    "features": [
+      "Three bedrooms on the supplied main-floor plan",
+      "Primary ensuite with tub, shower and dual sinks",
+      "Great room, dining area and island kitchen",
+      "Pantry, separate study and office",
+      "Attached garage with two vehicle doors"
+    ],
+    "specNote": "The supplied sheet shows the main floor and prints 2,233 sq. ft. as living area. Room counts cover this floor only: three bedrooms, two full bathrooms and one powder room. The study and office are not counted as bedrooms. Stairs marked UP are shown, but no upper-floor drawing or area is provided. These concept drawings are brainstorming material, not construction-ready plans.",
+    "bedsLabel": "3",
+    "bathsLabel": "2.5",
+    "image": "/assets/morse/plans/willow-exterior.webp",
+    "thumbnail": "/assets/morse/plans/willow-thumbnail.webp",
+    "floors": [
+      {
+        "label": "Main floor",
+        "area": "2,233 sq. ft.",
+        "preview": "/assets/morse/plans/willow-main-floor.webp",
+        "pdf": "/assets/morse/plans/willow-main-floor.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "wallace",
+    "name": "The Wallace",
+    "areaLabel": "1,458 sq. ft. main-floor living area",
+    "cardAreaLabel": "1,458 sq. ft. main floor",
+    "bedroomSummary": "2 bedrooms + flexible den",
+    "style": "Single-level living",
+    "summary": "Single-level living with two bedrooms, a flexible den, open living spaces and an attached garage.",
+    "description": "The Wallace brings the kitchen, dining area and great room together in a single-level layout. Two bedrooms are complemented by a flexible den/bedroom, with a kitchen island, pantry and two bathrooms. An attached garage and covered front porch complete the design.",
+    "features": [
+      "Open kitchen, dining and great room",
+      "Kitchen island and pantry",
+      "Primary bedroom with an ensuite shower bathroom",
+      "Flexible den/bedroom",
+      "Attached garage and covered front porch"
+    ],
+    "specNote": "Only a single main-floor drawing is supplied, with a printed living area of 1,458 sq. ft.; no additional floors are included in these facts. Two full bathrooms are verified from fixtures: one with a tub and one with a shower. The room marked DEN/BDRM is flexible space, not a guaranteed third bedroom. The garage is shown separately, but its area and exclusion from the printed living area are not explicitly stated.",
+    "bedsLabel": "2 + flexible den/bedroom",
+    "bathsLabel": "2",
+    "image": "/assets/morse/plans/wallace-exterior.webp",
+    "thumbnail": "/assets/morse/plans/wallace-thumbnail.webp",
+    "floors": [
+      {
+        "label": "Main floor",
+        "area": "1,458 sq. ft.",
+        "preview": "/assets/morse/plans/wallace-main-floor.webp",
+        "pdf": "/assets/morse/plans/wallace-main-floor.pdf"
+      }
+    ]
   }
 ];
+
+// A compact homepage selection mixing existing and newly supplied designs.
+const FEATURED_PLAN_SLUGS = ["maple", "modern", "willow", "hollow"];
+export const FEATURED_HOUSE_PLANS = FEATURED_PLAN_SLUGS
+  .map(slug => HOUSE_PLANS.find(plan => plan.slug === slug))
+  .filter((plan): plan is HousePlan => !!plan);
 
 export function getHousePlan(slug?: string): HousePlan | undefined {
   return HOUSE_PLANS.find(plan => plan.slug === slug);

@@ -22,6 +22,15 @@ ASSETS = {
     "saffron": ("The Saffron 2020.png", [("Saffron floor plan.pdf", "main")]),
 }
 
+ADDITIONAL_ASSETS = {
+    "modern": ("TheModern.png", [("Modern1stfloorplan.pdf", "main"), ("Modern2ndfloorplan.pdf", "second")]),
+    "mount": ("TheMount.png", [("Mount1stfloorplan.pdf", "main"), ("Mount2ndfloorplan.pdf", "second")]),
+    "canaan": ("TheCanaan.png", [("Canaanmainfloorplan.pdf", "main"), ("Canaanlowerfloorplan.pdf", "lower")]),
+    "overlook": ("TheOverlook.jpg", [("Overlook1stfloorplan.pdf", "main"), ("Overlook2ndfloorplan.pdf", "second")]),
+    "willow": ("TheWillow.webp", [("Willowfloorplan.pdf", "main")]),
+    "wallace": ("Wallace.png", [("Wallacefloorplan.pdf", "main")]),
+}
+
 
 def opaque(image):
     rgba = image.convert("RGBA")
@@ -33,10 +42,12 @@ def opaque(image):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
+    parser.add_argument("--batch", choices=["original", "additional"], default="original")
     parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parents[1] / "client/public/assets/morse/plans")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
-    for slug, (photo, floors) in ASSETS.items():
+    assets = ASSETS if args.batch == "original" else ADDITIONAL_ASSETS
+    for slug, (photo, floors) in assets.items():
         image = opaque(ImageOps.exif_transpose(Image.open(args.source / photo)))
         image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
         image.save(args.output / f"{slug}-exterior.webp", "WEBP", quality=88, method=6)

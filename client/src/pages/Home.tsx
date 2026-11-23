@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import HousePlanCard from "@/components/HousePlanCard";
 import { 
   Compass, 
   Hammer, 
@@ -30,7 +30,7 @@ import { toast } from "sonner";
 // Removed SEVEN_THINGS_DATA import as it is now moved to its own dedicated page
 import { FAQ_DATA } from "../faqData";
 import { PROCESS_STEPS } from "../processData";
-import { HOUSE_PLANS, getHousePlan } from "../housePlans";
+import { HOUSE_PLANS, FEATURED_HOUSE_PLANS, getHousePlan } from "../housePlans";
 
 // Morse Construction project assets
 const ASSETS = {
@@ -166,7 +166,7 @@ export default function Home() {
             <Link href="/seven-things" className="hover:text-[#1C3F24] transition-colors">7 Things Series</Link>
             <Link href="/social" className="hover:text-[#1C3F24] transition-colors">Posts</Link>
             <Link href="/area-info" className="hover:text-[#1C3F24] transition-colors">Area Information</Link>
-            <a href="#plans" className="hover:text-[#1C3F24] transition-colors">House Plans</a>
+            <Link href="/plans" className="hover:text-[#1C3F24] transition-colors">House Plans</Link>
             <a href="#faq" className="hover:text-[#1C3F24] transition-colors">FAQ</a>
           </nav>
 
@@ -463,7 +463,7 @@ export default function Home() {
                 Signature House Plans
               </h2>
               <p className="text-sm text-[#2C2C2A]/70 mt-2">
-                Explore eight Morse Construction designs. View the photos and floor plans, then make a plan your own.
+                A few starting points for your home. Explore the full collection of {HOUSE_PLANS.length} designs, then make a plan your own.
               </p>
             </div>
             <Button 
@@ -478,33 +478,12 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {HOUSE_PLANS.map(plan => (
-              <Link
-                key={plan.slug}
-                href={`/plans/${plan.slug}`}
-                aria-label={`View ${plan.name} photos and floor plans`}
-                className="group block h-full focus-visible:outline-2 focus-visible:outline-[#1C3F24] focus-visible:outline-offset-4"
-              >
-                <Card className="h-full py-0 gap-0 rounded-none border border-[#2C2C2A]/10 transition-all overflow-hidden bg-white group-hover:shadow-lg group-hover:border-[#1C3F24]/25 flex flex-col">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[#F5EFE6]/60">
-                    <img src={plan.thumbnail} alt={`${plan.name} exterior by Morse Construction`} loading="lazy" className="w-full h-full object-contain" />
-                  </div>
-                  <CardContent className="p-6 flex flex-col flex-1">
-                    <span className="text-[10px] uppercase tracking-wider text-[#8A705E] font-bold block mb-2">{plan.style}</span>
-                    <h3 className="font-serif text-xl font-bold text-[#1C3F24] mb-2">{plan.name}</h3>
-                    <p className="text-xs font-semibold text-[#1C3F24] mb-3">{plan.cardAreaLabel}</p>
-                    <p className="text-xs text-[#2C2C2A]/70 leading-relaxed mb-5 flex-1">{plan.summary}</p>
-                    <div className="pt-4 border-t border-[#2C2C2A]/5 text-xs text-[#2C2C2A]/60 space-y-1 mb-4">
-                      <p>{plan.bedroomSummary}</p>
-                      <p>{plan.bathsLabel} bathrooms</p>
-                    </div>
-                    <span className="inline-flex items-center gap-2 text-[11px] font-bold text-[#1C3F24]">
-                      View plan &amp; details <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+            {FEATURED_HOUSE_PLANS.map(plan => <HousePlanCard key={plan.slug} plan={plan} />)}
+          </div>
+          <div className="text-center mt-10">
+            <Button asChild className="bg-[#1C3F24] hover:bg-[#142F1A] text-white rounded-none px-8 py-6">
+              <Link href="/plans">View All House Plans <ArrowRight className="w-4 h-4 ml-2" /></Link>
+            </Button>
           </div>
         </div>
       </section>

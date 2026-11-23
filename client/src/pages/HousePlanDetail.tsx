@@ -41,7 +41,7 @@ export default function HousePlanDetail() {
             <a href="/#about" className="hover:text-[#1C3F24]">About Us</a>
             <a href="/#process" className="hover:text-[#1C3F24]">Our Process</a>
             <a href="/#featured-project" className="hover:text-[#1C3F24]">Featured Build</a>
-            <a href="/#plans" className="text-[#1C3F24]" aria-current="page">House Plans</a>
+            <Link href="/plans" className="text-[#1C3F24]" aria-current="page">House Plans</Link>
             <Link href="/area-info" className="hover:text-[#1C3F24]">Area Information</Link>
             <Link href="/social" className="hover:text-[#1C3F24]">Posts</Link>
           </nav>
@@ -54,9 +54,9 @@ export default function HousePlanDetail() {
       <main>
         <section className="bg-[#1C3F24] text-[#FBFBFA]">
           <div className="max-w-7xl mx-auto px-4 md:px-12 py-10 md:py-16">
-            <a href="/#plans" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#E5D5C5] hover:text-white mb-10">
+            <Link href="/plans" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#E5D5C5] hover:text-white mb-10">
               <ArrowLeft className="w-4 h-4" /> Back to House Plans
-            </a>
+            </Link>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
               <div className="lg:col-span-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-[#E5D5C5] font-bold mb-4">Signature House Plans</p>
@@ -172,14 +172,14 @@ export default function HousePlanDetail() {
           <div className="max-w-7xl mx-auto px-4 md:px-12">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
               <h2 className="font-serif text-3xl font-bold text-[#1C3F24]">Explore more designs</h2>
-              <a href="/#plans" className="text-sm font-semibold text-[#1C3F24] inline-flex items-center gap-2">View all house plans <ArrowRight className="w-4 h-4" /></a>
+              <Link href="/plans" className="text-sm font-semibold text-[#1C3F24] inline-flex items-center gap-2">View all house plans <ArrowRight className="w-4 h-4" /></Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map(item => (
                 <Link key={item.slug} href={`/plans/${item.slug}`} className="group bg-white border border-[#2C2C2A]/10 hover:shadow-lg transition-shadow focus-visible:outline-2 focus-visible:outline-[#1C3F24]">
                   <div className="aspect-[4/3] bg-[#F5EFE6]/60 overflow-hidden"><img src={item.thumbnail} alt={item.name} loading="lazy" className="w-full h-full object-contain" /></div>
                   <div className="p-6">
-                    <p className="text-xs text-[#8A705E] uppercase tracking-wider mb-2">{item.areaLabel}</p>
+                    <p className="text-xs text-[#8A705E] uppercase tracking-wider mb-2">{item.cardAreaLabel}</p>
                     <h3 className="font-serif text-xl font-bold text-[#1C3F24] mb-3">{item.name}</h3>
                     <span className="text-xs font-bold text-[#1C3F24] inline-flex items-center gap-2">View plan &amp; details <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></span>
                   </div>
@@ -193,7 +193,7 @@ export default function HousePlanDetail() {
       <footer className="bg-[#111] text-[#FBFBFA]/60 py-10">
         <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col sm:flex-row justify-between gap-5 text-xs">
           <p>© {new Date().getFullYear()} Morse Construction Inc. All rights reserved.</p>
-          <div className="flex flex-wrap gap-6"><a href="/#plans" className="hover:text-white">House Plans</a><a href="/#contact" className="hover:text-white">Contact Us</a><Link href="/seven-things" className="hover:text-white">7 Things Series</Link></div>
+          <div className="flex flex-wrap gap-6"><Link href="/plans" className="hover:text-white">House Plans</Link><a href="/#contact" className="hover:text-white">Contact Us</a><Link href="/seven-things" className="hover:text-white">7 Things Series</Link></div>
         </div>
       </footer>
 
